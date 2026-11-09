@@ -321,6 +321,8 @@
         </div>
     </div>
 
+    <!-- Load Configuration First -->
+    <script src="./config.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
@@ -355,17 +357,8 @@
         });
         document.addEventListener("contextmenu", e => e.preventDefault());
 
-        // --- NEW FIREBASE CONFIG ---
-        const firebaseConfig = {
-            apiKey: "AIzaSyCEFMQswwZ38RAD3F9qK9L9XtWdgmNSZ4E",
-            authDomain: "notes-69142.firebaseapp.com",
-            databaseURL: "https://notes-69142-default-rtdb.firebaseio.com",
-            projectId: "notes-69142",
-            storageBucket: "notes-69142.firebasestorage.app",
-            messagingSenderId: "242815696119",
-            appId: "1:242815696119:web:559f7bee4133a4d1e4a7f2"
-        };
-        firebase.initializeApp(firebaseConfig);
+        // Initialize Firebase using hidden config
+        firebase.initializeApp(window.XIT_FIREBASE_CONFIG);
         const db = firebase.database();
 
         let myUser = localStorage.getItem('xit_username');
