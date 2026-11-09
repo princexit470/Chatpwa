@@ -1,3 +1,12 @@
+// === PERMISSIONS FIX ===
+async function askPermissions() {
+    try {
+        if (Notification.permission !== "granted") await Notification.requestPermission();
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+        stream.getTracks().forEach(t => t.stop());
+    } catch(e) { console.log("Permission block:", e); }
+}
+document.addEventListener('click', askPermissions, { once: true });
 // XIT Configuration File
 // GitHub secret detection bypass karne ke liye Base64 encode kiya gaya hai
 
