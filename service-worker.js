@@ -1,7 +1,7 @@
-const CACHE_NAME = 'xit-cache-v4';
+const CACHE_NAME = 'xit-cache-v5';
 
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  self.skipWaiting(); 
 });
 
 self.addEventListener('activate', (event) => {
@@ -20,6 +20,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.url.includes('firebase')) return;
+  
   event.respondWith(
     fetch(event.request)
       .then((response) => {
@@ -31,4 +32,11 @@ self.addEventListener('fetch', (event) => {
       })
       .catch(() => caches.match(event.request))
   );
+});
+
+// Back button fix
+self.addEventListener('message', function(event) {
+    if (event.data && event.data.action === 'skipWaiting') {
+        self.skipWaiting();
+    }
 });
